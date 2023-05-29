@@ -21,7 +21,8 @@ def test_register(client, app):
 ))
 def test_register_validate_input(client, username, password, message):
     response = client.post(
-        'auth/register', data={'username':username, 'password':password}
+        '/auth/register', 
+        data={'username':username, 'password':password}
     )
     assert message in response.data
 
@@ -45,7 +46,7 @@ def test_login_validate_input(auth, username, password, message):
 
 def test_logout(client, auth):
     auth.login()
-    
+
     with client:
         auth.logout()
         assert 'user_id' not in session
