@@ -1,5 +1,8 @@
 import functools
 
+import sqlite3
+from sqlite3 import IntegrityError
+
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
@@ -17,7 +20,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db
+        db = get_db()
         error = None
 
         if username is None:
